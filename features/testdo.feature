@@ -7,7 +7,12 @@ Feature: TestDO
       test do
         1 == 1
         2 == 2
-        /\d/ =~ '9'
+        /\d/ === '9'
       end
       """  
     When I successfully run `ruby -S file.rb`
+    Then the output should contain exactly:
+      """
+      OK: 3
+
+      """
