@@ -12,7 +12,7 @@ module Testdo
 
     CAPTURE = {
       [Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => %i[== === > < =~],
-      [Array] => %i[include?] }
+      [Array] => %i[include? all? any? empty? one? none? member?] }
 
     def initialize(capture: CAPTURE)
       @capture = capture
@@ -20,13 +20,11 @@ module Testdo
     end
 
     def feed &block
-      results = []
-      Capture(@capture) { |method,arg1,arg2,result|
-        text = "#{arg1.inspect} #{method.to_s} #{arg2.inspect}" 
-        results << {text: text, result: result}
+      Capture(@capture) { |receiver,msg,arguments,block,result|
+        text = "#{receiver.inspect} #{msg.to_s} #{arguments.map(&:inspect).join(', ')}" 
+        @result << {text: text, result: result}
       }.eval(&block)
 
-      @result.push *results
       self
     end
 

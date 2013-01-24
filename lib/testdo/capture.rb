@@ -3,8 +3,8 @@ module Testdo
   # used to outflank refinement
   class Unwrap
     def initialize obj; @obj = obj end
-    def send *a
-      obj.send *a
+    def send *a,&b
+      obj.send *a,&b
     end
     private; attr_reader :obj
     def self.[] *a; new *a end
@@ -20,8 +20,8 @@ module Testdo
         [*classes].each do |klass|
           refine klass do
             [*method_names].each do |name|
-              define_method name do |other|
-                Unwrap[self].send(__method__,other).tap { |result| callback.call __method__,self,other,result }
+              define_method name do |*arguments,&block|
+                Unwrap[self].send(__method__,*arguments,&block).tap { |result| callback.call self,__method__,arguments,block,result }
               end
             end
           end
@@ -50,7 +50,7 @@ if __FILE__== $0 # kind of usage
 
   # CaptureModule
   class Any
-    using CaptureModule(String => :+) { |m,a1,a2,result| @got = result } # don't try do-end block here
+    using CaptureModule(String => :+, Array => :all?) { |receiver,msg,args,block,result| @got = result } # don't try do-end block here
 
     def self.eval &block
       class_eval &block
@@ -61,13 +61,14 @@ if __FILE__== $0 # kind of usage
 
   raise unless Any.eval { '1'+'1';nil }.got == '11'
   raise unless Any.eval { '2'+'2';nil }.got == '22'
-
+  raise unless Any.eval { [1,2].all?{true} }.got == true
+  raise unless Any.eval { [1,2].all?{false} }.got == false
 
   # Capture
   got = nil
-  Capture([String,Fixnum] => [:+, :-]) { |m,a1,a2,result| got = result }.eval { '3'+'3';nil }
+  Capture([String,Fixnum] => [:+, :-]) { |receiver,msg,args,block,result| got = result }.eval { '3'+'3';nil }
   raise unless got == '33'
-  Capture([String,Fixnum] => [:+, :-]) { |m,a1,a2,result| got = result }.eval { 3+3;nil }
+  Capture([String,Fixnum] => [:+, :-]) { |receiver,msg,args,block,result| got = result }.eval { 3+3;nil }
   raise unless got == 6
 
 
@@ -76,4 +77,6 @@ if __FILE__== $0 # kind of usage
   Object.class_eval{ 'any'+'any'; 0 + 0 }
   instance_eval{ 'any'+'any'; 0 + 0 }
   raise unless got == nil
+
+  puts 'OK'
 end
