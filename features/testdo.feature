@@ -1,4 +1,4 @@
-Feature: TestDO
+Feature: TestDO tested on ruby-2.0.0-preview2
 
   Scenario:
     Given a file named "file.rb" with:
