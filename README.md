@@ -1,5 +1,7 @@
 # Testdo
 
+tested on ruby-2.0.0-preview2
+
 TODO: Write a gem description
 
 ## Installation
