@@ -14,7 +14,7 @@ module Testdo
 
     CAPTURE = {
       [Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => BASIC_EXPECTATIONS,
-      [Array] => %i[include? all? any? empty? one? none? member?] + BASIC_EXPECTATIONS }
+      [Array] => %i[include? all? any? empty? one? none? member? equal?] + BASIC_EXPECTATIONS }
 
     def initialize(capture: CAPTURE)
       @capture = capture

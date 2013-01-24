@@ -79,11 +79,13 @@ Feature: TestDO
       require 'testdo'
       test do
         %w[a b] == %w[a b]
+        a = %w[a b]
+        a.equal? a
       end
       """  
     When I successfully run `ruby file.rb`
     Then the output should contain exactly:
       """
-      OK: 1
+      OK: 2
 
       """         
