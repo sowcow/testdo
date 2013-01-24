@@ -13,7 +13,7 @@ module Testdo
     BASIC_EXPECTATIONS = %i[== === > < =~]
 
     CAPTURE = {
-      [Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => BASIC_EXPECTATIONS,
+      [Time,Symbol,Rational,Integer,Hash,Bignum,Float,Complex,NilClass,Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => BASIC_EXPECTATIONS,
       [Array] => %i[include? all? any? empty? one? none? member? equal?] + BASIC_EXPECTATIONS }
 
     def initialize(capture: CAPTURE)

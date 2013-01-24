@@ -81,11 +81,12 @@ Feature: TestDO
         %w[a b] == %w[a b]
         a = %w[a b]
         a.equal? a
+        {a: 1} == {a: 1}
       end
       """  
     When I successfully run `ruby file.rb`
     Then the output should contain exactly:
       """
-      OK: 2
+      OK: 3
 
       """         
