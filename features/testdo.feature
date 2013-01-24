@@ -72,3 +72,18 @@ Feature: TestDO
       OK: 0, failed: 1
 
       """        
+
+  Scenario:
+    Given a file named "file.rb" with:
+      """
+      require 'testdo'
+      test do
+        %w[a b] == %w[a b]
+      end
+      """  
+    When I successfully run `ruby file.rb`
+    Then the output should contain exactly:
+      """
+      OK: 1
+
+      """         

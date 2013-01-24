@@ -10,9 +10,11 @@ module Testdo
   class Test
     include Testdo
 
+    BASIC_EXPECTATIONS = %i[== === > < =~]
+
     CAPTURE = {
-      [Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => %i[== === > < =~],
-      [Array] => %i[include? all? any? empty? one? none? member?] }
+      [Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => BASIC_EXPECTATIONS,
+      [Array] => %i[include? all? any? empty? one? none? member?] + BASIC_EXPECTATIONS }
 
     def initialize(capture: CAPTURE)
       @capture = capture
