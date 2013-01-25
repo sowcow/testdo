@@ -5,8 +5,8 @@ Feature: TestDO tested on ruby-2.0.0-preview2
       """
       require 'testdo'
       test do
-        1 == 1
-        2 == 2
+        1 === 1
+        2 === 2
         /\d/ === '9'
       end
       """  
@@ -23,8 +23,8 @@ Feature: TestDO tested on ruby-2.0.0-preview2
       """
       require 'testdo'
       test do
-        1 == 2
-        2 == 3
+        1 === 2
+        2 === 3
         %w[a b].include? 'c'
       end
       """  
@@ -32,8 +32,8 @@ Feature: TestDO tested on ruby-2.0.0-preview2
     Then the output should contain exactly:
       """
       Failed examples:
-      1 == 2
-      2 == 3
+      1 === 2
+      2 === 3
       ["a", "b"] include? "c"
       OK: 0, failed: 3
 
@@ -78,18 +78,17 @@ Feature: TestDO tested on ruby-2.0.0-preview2
       """
       require 'testdo'
       test do
-        %w[a b] == %w[a b]
+        %w[a b] === %w[a b]
         a = %w[a b]
         a.equal? a
-        {a: 1} == {a: 1}
-        Array == Array
-        Array != String
+        {a: 1} === {a: 1}
+        Array.name === Array.name
       end
       """  
     When I successfully run `ruby file.rb`
     Then the output should contain exactly:
       """
-      OK: 5
+      OK: 4
 
       """         
 
@@ -98,20 +97,14 @@ Feature: TestDO tested on ruby-2.0.0-preview2
       """
       require 'testdo'
       test do
-        [*1..10].select { |x| x > 5 } == []
-        # dont use > < as expectations
-        # 1 > 5
-        # 2 > 5
-        # 3 > 5
-        # 4 > 5
-        # 5 > 5
+        [*1..10].select { |x| x > 5 } === []
       end
       """  
     When I successfully run `ruby file.rb`
     Then the output should contain exactly:
       """
       Failed examples:
-      [6, 7, 8, 9, 10] == []
+      [6, 7, 8, 9, 10] === []
       OK: 0, failed: 1
 
       """  
