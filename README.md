@@ -2,16 +2,18 @@
 
 tested on ruby-2.0.0-preview2
 
-    if __FILE__ == $0
-    require 'testdo'
-    test do
-      a = 2
-      # your expecations using === or Array#all? etc.
-      a === 2
-      [a, a].all? { |x| x == 2 }
-      /\d/ === a.to_s
-    end
-    end
+```ruby
+if __FILE__ == $0
+require 'testdo'
+test do
+  a = 2
+  # your expecations using === or Array#all? etc.
+  a === 2
+  [a, a].all? { |x| x == 2 }
+  /\d/ === a.to_s
+end
+end
+```
 
 more examples at features/*
 
