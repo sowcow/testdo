@@ -10,7 +10,7 @@ module Testdo
   class Test
     include Testdo
 
-    BASIC_EXPECTATIONS = %i[== === > < =~]
+    BASIC_EXPECTATIONS = %i[== ===]
 
     CAPTURE = {
       [Time,Symbol,Rational,Integer,Hash,Bignum,Float,Complex,NilClass,Fixnum, Range, String, NilClass, Regexp, TrueClass, FalseClass] => BASIC_EXPECTATIONS,
