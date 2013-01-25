@@ -82,12 +82,14 @@ Feature: TestDO tested on ruby-2.0.0-preview2
         a = %w[a b]
         a.equal? a
         {a: 1} == {a: 1}
+        Array == Array
+        Array != String
       end
       """  
     When I successfully run `ruby file.rb`
     Then the output should contain exactly:
       """
-      OK: 3
+      OK: 5
 
       """         
 
