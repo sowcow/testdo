@@ -6,7 +6,7 @@ tested on ruby-2.0.0-preview2
 # your code
 a = 2
 
-exit unless __FILE__ == $0
+if __FILE__ == $0
 require 'testdo'
 test do
   # your expecations using === or Array#(all? any? ...)
@@ -14,6 +14,7 @@ test do
   [1, a].any? { |x| x > 1 }
   /\d/ === a.to_s
   [1,2,2,3,3] - [1,2,3] === []
+end
 end
 ```
 
