@@ -3,15 +3,16 @@
 tested on ruby-2.0.0-preview2
 
 ```ruby
-if __FILE__ == $0
+# your code
+a = 2
+
+exit unless __FILE__ == $0
 require 'testdo'
 test do
-  a = 2
-  # your expecations using === or Array#all? etc.
-  a === 2
-  [a, a].all? { |x| x == 2 }
+  # your expecations using === or Array#(all? any? ...)
+  a + 1 === 3
+  [1, a].any? { |x| x > 1 }
   /\d/ === a.to_s
-end
 end
 ```
 
