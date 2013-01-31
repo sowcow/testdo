@@ -35,6 +35,9 @@ module Testdo
     Class.new do
       extend Testdo
       using CaptureModule(classes_methods, &callback)
+      # @classes_methods = classes_methods
+      # @callback = callback
+      # using CaptureModule(@classes_methods, &@callback)
 
       def self.eval &block;
         class_eval &block
