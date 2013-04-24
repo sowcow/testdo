@@ -1,9 +1,5 @@
 # ~~Testdo~~ (FAILed and I don't remove it because of laziness :smile:)
 
-tested on ruby-2.0.0-preview2
-tests fail on ruby-head :( (http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec)
-I'll wait till next ruby release
-
 ```ruby
 # your code
 a = 2
@@ -19,5 +15,3 @@ test do
 end
 end
 ```
-
-more examples at features/*
